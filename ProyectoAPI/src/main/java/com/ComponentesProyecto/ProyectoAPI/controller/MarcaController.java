@@ -34,19 +34,19 @@ public class MarcaController {
         return ResponseEntity.ok(marcaService.getMarcaById(id));
     }
 
-    @GetMapping("/marcas")
+    @GetMapping("/getMarcas")
     public ResponseEntity<List<Marca>> getMarcasList(){
         return ResponseEntity.ok(marcaService.getMarcasList());
 
     }
 
-    @PutMapping("/marca/{id}")
+    @PutMapping("/updateMarca/{id}")
     public ResponseEntity<Marca> updateMarca(@PathVariable String id,@RequestBody Marca marca){
         return ResponseEntity.ok(marcaService.updateMarca(id,marca));
 
     }
 
-    @DeleteMapping("/marca/{id}")
+    @DeleteMapping("/delMarca/{id}")
     public void deleteMarca(@PathVariable String id){
          marcaService.deleteMarca(id);
     }
