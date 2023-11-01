@@ -5,19 +5,23 @@ import com.ComponentesProyecto.ProyectoAPI.repositories.MarcaRepository;
 import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
 @Service
 public class MarcaServiceIml implements MarcaService {
 
-    @Autowired
-    MarcaRepository marcaRepository;
+    private final MarcaRepository marcaRepository;
+
+    public MarcaServiceIml(MarcaRepository marcaRepository){
+        this.marcaRepository = marcaRepository;
+    }
 
 
     @Override
     public List<Marca> getMarcasList() {
-        return (List<Marca>) marcaRepository.findAll() ;
+        return (List<Marca>) this.marcaRepository.findAll() ;
     }
 
     @Override
@@ -32,10 +36,8 @@ public class MarcaServiceIml implements MarcaService {
     }
 
     @Override
-    public Marca updateMarca(String id, Marca marca) {
-         marcaRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("La marca no se ha encontrado: " + id));
-                marca.setMarca_id(id);
+    public Marca updateMarca(String id, @RequestBody Marca marca) {
+         marcaRepository.findById(id) .orElseThrow(()-> new ResourceNotFoundException("La marca no se ha encontrado: " + id));
          return marcaRepository.save(marca);
         //Modificar para cambiar fecha de presentacion.
     }
@@ -47,4 +49,17 @@ public class MarcaServiceIml implements MarcaService {
         marcaRepository.deleteById(id);
 
     }
+
+    @Override
+    public Marca getMarcaByName(String marca_nombre) {
+
+        return marcaRepository.findMarcaByName(marca_nombre);
+    }
+
+    @Override
+    public Marca findByMarcaId(String marca_id) {
+        return marcaRepository.findByMarcaId(marca_id);
+    }
+
+
 }

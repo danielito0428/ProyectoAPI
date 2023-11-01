@@ -8,6 +8,8 @@ public interface MarcaService {
     List<Marca> getMarcasList();
     Marca saveMarca(Marca marca);
     Marca getMarcaById(String id);
-    Marca updateMarca(String id, Marca marca);
+    Marca updateMarca(String marca_id, Marca marca);
     void deleteMarca(String id);
+    Marca getMarcaByName(String marca_nombre);
+    Marca findByMarcaId(String marca_id);
 }
