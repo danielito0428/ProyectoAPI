@@ -21,27 +21,20 @@ public class Marca {
     @Id
     private String _id;
 
-    private String marca_id;
-
     private String nombre_marca;
 
     private String num_expediente;
 
-    private String fecha_presentacion;
-
-    private int num_registro;
-
     private String fecha_registro;
 
-    private String fecha_publicacion;
+    private String detalle;
 
     private String nombre_solicitante;
+    private String logo;
 
-    private String tipo_solicitud;
+    private double clase_niza;
 
-    private String subtipo_solicitud;
 
-    private String estado;
 
 
 }

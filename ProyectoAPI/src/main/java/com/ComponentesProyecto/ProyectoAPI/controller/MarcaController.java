@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -34,27 +35,27 @@ public class MarcaController {
         return ResponseEntity.ok(this.marcaServiceIml.getMarcasList());
 
     }
-    @PostMapping("/newMarca")
-    public ResponseEntity<Marca> saveMarca(@RequestBody Marca marca){
+    @PostMapping
+    public ResponseEntity<Marca> saveMarca(@RequestBody Marca marca) throws URISyntaxException {
         return ResponseEntity.ok(this.marcaServiceIml.saveMarca(marca));
     }
 
-    @GetMapping("/byName/{marca_nombre}")
-    public ResponseEntity<Marca> getMarcaByName(Model model, @PathVariable String marca_nombre){
+    @GetMapping("/byName")
+    public ResponseEntity<Marca> getMarcaByName(Model model, @RequestParam(value = "name") String marca_nombre){
         return ResponseEntity.ok(this.marcaServiceIml.getMarcaByName(marca_nombre));
 
     }
-    @GetMapping("/byMarcaID/{marca_id}")
+    @GetMapping("/{marca_id}")
     public ResponseEntity<Marca> getMarcaByMarcaID(Model model, @PathVariable String marca_id){
-        return ResponseEntity.ok(this.marcaServiceIml.findByMarcaId(marca_id));
+        return ResponseEntity.ok(this.marcaServiceIml.getMarcaById(marca_id));
 
     }
 
-    @PutMapping("/updateMarca/{marca_id}")
+    @PutMapping("/{marca_id}")
     public ResponseEntity<Marca> updateMarca(@PathVariable String marca_id, @RequestBody Marca marca){
         return ResponseEntity.ok(this.marcaServiceIml.updateMarca(marca_id,marca));
     }
-    @DeleteMapping("/delMarca/{id}")
+    @DeleteMapping("/{id}")
     public void deleteMarca(@PathVariable String id){
         this.marcaServiceIml.deleteMarca(id);
     }

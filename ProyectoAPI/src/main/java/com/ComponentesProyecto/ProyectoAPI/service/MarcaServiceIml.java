@@ -4,9 +4,12 @@ import com.ComponentesProyecto.ProyectoAPI.entity.Marca;
 import com.ComponentesProyecto.ProyectoAPI.repositories.MarcaRepository;
 import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @Service
@@ -25,8 +28,9 @@ public class MarcaServiceIml implements MarcaService {
     }
 
     @Override
-    public Marca saveMarca(Marca marca) {
-        return marcaRepository.save(marca);
+    public Marca saveMarca(Marca marca) throws URISyntaxException {
+        Marca savedMarca = marcaRepository.save(marca);
+        return ResponseEntity.created(new URI("/marcas/" + savedMarca.get_id())).body(savedMarca).getBody();
     }
 
     @Override
@@ -37,8 +41,14 @@ public class MarcaServiceIml implements MarcaService {
 
     @Override
     public Marca updateMarca(String id, @RequestBody Marca marca) {
-         marcaRepository.findById(id) .orElseThrow(()-> new ResourceNotFoundException("La marca no se ha encontrado: " + id));
-         return marcaRepository.save(marca);
+        Marca currentMarca = marcaRepository.findById(id) .orElseThrow(()-> new ResourceNotFoundException("La marca no se ha encontrado: " + id));
+        currentMarca.setNombre_marca(marca.getNombre_marca());
+        currentMarca.setNombre_solicitante(marca.getNombre_solicitante());
+        currentMarca.setClase_niza(marca.getClase_niza());
+        currentMarca.setDetalle(marca.getDetalle());
+        currentMarca.setLogo(marca.getLogo());
+
+        return marcaRepository.save(marca);
         //Modificar para cambiar fecha de presentacion.
     }
 
