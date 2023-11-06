@@ -3,7 +3,9 @@ package com.ComponentesProyecto.ProyectoAPI.service;
 import com.ComponentesProyecto.ProyectoAPI.entity.Marca;
 import com.ComponentesProyecto.ProyectoAPI.repositories.MarcaRepository;
 import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
+import org.apache.http.protocol.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,10 +30,14 @@ public class MarcaServiceIml implements MarcaService {
     }
 
     @Override
-    public Marca saveMarca(Marca marca) throws URISyntaxException {
-        Marca savedMarca = marcaRepository.save(marca);
-        return ResponseEntity.created(new URI("/marcas/" + savedMarca.get_id())).body(savedMarca).getBody();
+    public Marca saveMarca(Marca marca)  {
+         Marca _marca = marcaRepository.save(new Marca( marca.getNombre_marca(), marca.getNombre_solicitante(), marca.getNum_expediente(),
+                    marca.getFecha_registro(), marca.getDetalle(), marca.getLogo(), marca.getClase_niza()));
+
+         return _marca;
     }
+
+
 
     @Override
     public Marca getMarcaById(String id) {

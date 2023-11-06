@@ -17,7 +17,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/marcas")
+@RequestMapping("/api")
 public class MarcaController {
 
 
@@ -30,19 +30,19 @@ public class MarcaController {
         this.marcaServiceIml = marcaServiceIml;
     }
 
-    @GetMapping
+    @GetMapping("/marcas")
     public ResponseEntity<List<Marca>> getMarcas(){
         return ResponseEntity.ok(this.marcaServiceIml.getMarcasList());
 
     }
-    @PostMapping
+    @PostMapping("/marcas")
     public ResponseEntity<Marca> saveMarca(@RequestBody Marca marca) throws URISyntaxException {
         return ResponseEntity.ok(this.marcaServiceIml.saveMarca(marca));
     }
 
-    @GetMapping("/byName")
-    public ResponseEntity<Marca> getMarcaByName(Model model, @RequestParam(value = "name") String marca_nombre){
-        return ResponseEntity.ok(this.marcaServiceIml.getMarcaByName(marca_nombre));
+    @GetMapping("/marcas/{nombre_marca}")
+    public ResponseEntity<Marca> getMarcaByName(Model model, @PathVariable String nombre_marca){
+        return ResponseEntity.ok(this.marcaServiceIml.getMarcaByName(nombre_marca));
 
     }
     @GetMapping("/{marca_id}")
@@ -51,11 +51,11 @@ public class MarcaController {
 
     }
 
-    @PutMapping("/{marca_id}")
+    @PutMapping("/marcas/{marca_id}")
     public ResponseEntity<Marca> updateMarca(@PathVariable String marca_id, @RequestBody Marca marca){
         return ResponseEntity.ok(this.marcaServiceIml.updateMarca(marca_id,marca));
     }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/marcas/{id}")
     public void deleteMarca(@PathVariable String id){
         this.marcaServiceIml.deleteMarca(id);
     }

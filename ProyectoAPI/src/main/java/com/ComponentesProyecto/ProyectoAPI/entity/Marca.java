@@ -12,7 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "marcas")
 @Data
-
 @AllArgsConstructor
 @NoArgsConstructor
 public class Marca {
@@ -35,6 +34,13 @@ public class Marca {
     private double clase_niza;
 
 
-
-
+    public Marca(String nombre_marca, String num_expediente, String fecha_registro, String detalle, String nombre_solicitante, String logo, double clase_niza) {
+        this.nombre_marca = nombre_marca;
+        this.num_expediente = num_expediente;
+        this.fecha_registro = fecha_registro;
+        this.detalle = detalle;
+        this.nombre_solicitante = nombre_solicitante;
+        this.logo = logo;
+        this.clase_niza = clase_niza;
+    }
 }
