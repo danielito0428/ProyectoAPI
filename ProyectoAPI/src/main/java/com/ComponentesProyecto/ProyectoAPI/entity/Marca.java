@@ -29,12 +29,21 @@ public class Marca {
     private String detalle;
 
     private String nombre_solicitante;
+
     private String logo;
 
     private double clase_niza;
 
+    private String tipo_solicitud;
 
-    public Marca(String nombre_marca, String num_expediente, String fecha_registro, String detalle, String nombre_solicitante, String logo, double clase_niza) {
+    private String subtipo_solicitud;
+
+    private String estado;
+    private double num_registro;
+
+
+    public Marca(String nombre_marca, String num_expediente, String fecha_registro, String detalle,
+                 String nombre_solicitante, String logo, double clase_niza, String tipo_solicitud, String subtipo_solicitud, String estado, double num_registro) {
         this.nombre_marca = nombre_marca;
         this.num_expediente = num_expediente;
         this.fecha_registro = fecha_registro;
@@ -42,5 +51,9 @@ public class Marca {
         this.nombre_solicitante = nombre_solicitante;
         this.logo = logo;
         this.clase_niza = clase_niza;
+        this.tipo_solicitud = tipo_solicitud;
+        this.subtipo_solicitud = subtipo_solicitud;
+        this.estado = estado;
+        this.num_registro = num_registro;
     }
 }

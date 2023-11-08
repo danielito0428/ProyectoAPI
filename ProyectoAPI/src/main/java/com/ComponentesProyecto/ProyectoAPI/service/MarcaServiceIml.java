@@ -12,10 +12,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Service
 public class MarcaServiceIml implements MarcaService {
+
+    Date date = new Date();
+    Calendar cal = new GregorianCalendar();
+
+
+
+
 
     private final MarcaRepository marcaRepository;
 
@@ -29,10 +39,14 @@ public class MarcaServiceIml implements MarcaService {
         return (List<Marca>) this.marcaRepository.findAll() ;
     }
 
+
     @Override
     public Marca saveMarca(Marca marca)  {
-         Marca _marca = marcaRepository.save(new Marca( marca.getNombre_marca(), marca.getNum_expediente(),
-                 marca.getFecha_registro(), marca.getDetalle(), marca.getNombre_solicitante(),marca.getLogo(), marca.getClase_niza()));
+        cal.setTime(date);
+        int year = cal.get(Calendar.YEAR);
+                Marca _marca = marcaRepository.save(new Marca( marca.getNombre_marca(), String.valueOf(year) + "-" +Math.floor(Math.random()*99999) ,
+                 marca.getFecha_registro(), marca.getDetalle(), marca.getNombre_solicitante(),marca.getLogo(),
+                 marca.getClase_niza(),marca.getTipo_solicitud(), marca.getSubtipo_solicitud(), "Solicitado", Math.floor(Math.random()*999999)));
 
          return _marca;
     }
