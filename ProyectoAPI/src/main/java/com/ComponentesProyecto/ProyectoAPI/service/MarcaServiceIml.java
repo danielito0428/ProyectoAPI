@@ -31,8 +31,8 @@ public class MarcaServiceIml implements MarcaService {
 
     @Override
     public Marca saveMarca(Marca marca)  {
-         Marca _marca = marcaRepository.save(new Marca( marca.getNombre_marca(), marca.getNombre_solicitante(), marca.getNum_expediente(),
-                    marca.getFecha_registro(), marca.getDetalle(), marca.getLogo(), marca.getClase_niza()));
+         Marca _marca = marcaRepository.save(new Marca( marca.getNombre_marca(), marca.getNum_expediente(),
+                 marca.getFecha_registro(), marca.getDetalle(), marca.getNombre_solicitante(),marca.getLogo(), marca.getClase_niza()));
 
          return _marca;
     }
