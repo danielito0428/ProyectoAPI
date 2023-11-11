@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URISyntaxException;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"https://reactcomponentes.azurewebsites.net", "http://localhost:3000/"})
 @RestController
 @RequestMapping("/api")
 public class MarcaController {
